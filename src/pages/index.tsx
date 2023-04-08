@@ -78,10 +78,10 @@ const Index = ({ articles }: IndexProps) => {
             />
           </div>
           {/* Ajouter un champ de texte pour la recherche */}
-          <div className="flex justify-center mb-8">
+          <div className="flex justify-center mb-8 ">
             <input
               type="text"
-              className="border p-2 rounded"
+              className="border p-2 rounded w-80"
               placeholder="Rechercher par titre ou thème"
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}

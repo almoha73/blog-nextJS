@@ -1,6 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
-
 
 type Option = { label: string; value: any };
 
@@ -11,9 +10,11 @@ interface DropdownMenuProps {
 
 const DropdownMenu = ({ options, onSelect }: DropdownMenuProps) => {
 
-    const [isOpen, setIsOpen] = useState(false);
-    const [selectedOption, setSelectedOption] = useState<Option | null> (options && options.length ? options[0] : null);
-
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState<Option | null>(
+    options && options.length ? options[0] : null
+  );
+  const wrapperRef = useRef<HTMLDivElement | null>(null);
 
   function handleOptionClick(option: Option) {
     setSelectedOption(option);
@@ -21,8 +22,20 @@ const DropdownMenu = ({ options, onSelect }: DropdownMenuProps) => {
     setIsOpen(false);
   }
 
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [wrapperRef]);
+
   return (
-    <div className="relative inline-block text-left">
+    <div ref={wrapperRef} className="relative inline-block text-left">
       <div>
         <button
           type="button"
@@ -59,6 +72,6 @@ const DropdownMenu = ({ options, onSelect }: DropdownMenuProps) => {
       )}
     </div>
   );
-}
+};
 
 export default DropdownMenu;
