@@ -48,7 +48,7 @@ const EditArticle = ({ article }: { article: Article }) => {
                 id="title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="mt-1 block w-full rounded-md border-gray-300 focus:ring-blue-500"
+                className="mt-1 block w-full rounded-md border-gray-300 focus:ring-blue-500 p-2"
               />
             </div>
             <div className="mb-4">
@@ -61,10 +61,10 @@ const EditArticle = ({ article }: { article: Article }) => {
               <textarea
                 name="content"
                 id="content"
-                rows={10}
+                rows={20}
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
-                className="mt-1 block w-full rounded-md border-gray-300 focus:ring-blue-500"
+                className="mt-1 block w-full rounded-md border-gray-300 focus:ring-blue-500 p-2"
               ></textarea>
             </div>
             <button
