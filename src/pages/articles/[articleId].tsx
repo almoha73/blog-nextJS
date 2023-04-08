@@ -5,18 +5,26 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import { Article } from "../../types/type";
 import { db } from "../api/firebase";
-import { getDoc, doc } from "firebase/firestore";
+import { getDoc, doc, deleteDoc } from "firebase/firestore";
 import hljs from "highlight.js";
 import "highlight.js/styles/default.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const ArticleDetail = ({ articles }: { articles: Article }) => {
   // Utilisez cet ID pour afficher les détails de l'article correspondant
-  //const router = useRouter();
-  
+  const router = useRouter();
+  const [isMobile, setIsMobile] = useState(false);
+
+  const handleDelete = async () => {
+    if (window.confirm("Êtes-vous sûr de vouloir supprimer cet article ?")) {
+      await deleteDoc(doc(db, "articles", articles.id));
+      router.push("/");
+    }
+  };
 
   useEffect(() => {
     hljs.highlightAll();
+    setIsMobile(/Mobi|Android/i.test(navigator.userAgent));
   }, []);
 
   return (
@@ -24,7 +32,19 @@ const ArticleDetail = ({ articles }: { articles: Article }) => {
       <Navbar />
       <main className="flex-1 bg-gray-100">
         <div className="max-w-4xl mx-auto py-6">
-          <h1 className="text-3xl font-bold mb-4">Article détails</h1>
+          <div className="flex justify-between items-center mb-6">
+            <h1 className="text-3xl font-bold">
+              {articles && articles.theme}: {articles && articles.title}
+            </h1>
+            <button
+              className={`${
+                isMobile ? "text-red-500" : "bg-red-500 text-white"
+              } font-bold py-2 px-4 rounded ${isMobile ? "text-xl" : ""}`}
+              onClick={handleDelete}
+            >
+              {isMobile ? "✕" : "Supprimer"}
+            </button>
+          </div>
           {!articles ? (
             <p>Chargement...</p>
           ) : (
@@ -34,8 +54,6 @@ const ArticleDetail = ({ articles }: { articles: Article }) => {
                   key={articles.id}
                   className="p-6 mb-6 bg-white rounded-lg shadow-md"
                 >
-                  <h2 className="text-xl font-bold mb-2">{articles.theme}: {articles.title}</h2>
-
                   {articles && articles.fileType ? (
                     articles.fileType.startsWith("image") ? (
                       <Image
@@ -75,9 +93,12 @@ const ArticleDetail = ({ articles }: { articles: Article }) => {
                     <p>Aucun fichier à afficher</p>
                   )}
 
-                  
-                  <div dangerouslySetInnerHTML={{ __html: hljs.highlightAuto(articles.content).value }} style={{ whiteSpace: "pre-wrap" }}></div>
-
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: hljs.highlightAuto(articles.content).value,
+                    }} // articles.
+                    style={{ whiteSpace: "pre-wrap" }}
+                  ></div>
                 </div>
               </article>
             )
