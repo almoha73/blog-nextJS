@@ -1,5 +1,4 @@
-import { Fragment, useState } from "react";
-import { Menu, Transition } from "@headlessui/react";
+import { useState } from "react";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 
 
@@ -9,8 +8,6 @@ interface DropdownMenuProps {
   options: Option[];
   onSelect: (option: any) => void; // Définir la fonction de rappel onSelect
 }
-
-
 
 const DropdownMenu = ({ options, onSelect }: DropdownMenuProps) => {
 

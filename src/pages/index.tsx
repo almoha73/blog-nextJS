@@ -3,13 +3,12 @@ import { useRouter } from "next/router";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { db } from "./api/firebase";
-import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
+import { collection, getDocs, orderBy, query, limit } from "firebase/firestore";
 import { Article } from "../types/type";
 import DropdownMenu from "../components/DropdownMenu";
 
 interface IndexProps {
   articles: Article[];
-  
 }
 
 enum SortOption {
@@ -28,31 +27,40 @@ export const sortOptions = [
   { label: "Thème", value: SortOption.Theme },
 ];
 
-const Index = ({ articles: unsortedArticles }: IndexProps) => {
+const Index = ({ articles }: IndexProps) => {
   const router = useRouter();
-  const [sortOption, setSortOption] = useState<SortOption>(SortOption.DateDesc); // Définir l'état local pour l'option de tri
-  
+  const [sortOption, setSortOption] = useState<SortOption>(SortOption.DateDesc); // Définir l'état local de départ pour l'option de tri
+  const [searchValue, setSearchValue] = useState(""); // Ajouter un état local pour la valeur de recherche
+
   function handleArticleClick(articleId: string) {
     router.push(`/articles/${articleId}`);
   }
 
-  
-
   // Effectuer le tri des articles en fonction de l'option sélectionnée
-  const sortedArticles = [...unsortedArticles].sort((a, b) => {
-    if (sortOption === SortOption.NameDesc) {
-      return b.title.localeCompare(a.title);
-    } else if (sortOption === SortOption.NameAsc) {
-      return a.title.localeCompare(b.title);
-    } else if (sortOption === SortOption.Theme) {
-      return (a.theme ?? "").localeCompare(b.theme ?? "");
-    } else if (sortOption === SortOption.DateDesc) {
-      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-    } else {
-      // SortOption.DateAsc
-      return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
-    }
-  });
+  const filteredAndSortedArticles = articles
+    .filter(
+      (article) =>
+        article.title.toLowerCase().includes(searchValue.toLowerCase()) ||
+        (article.theme ?? "").toLowerCase().includes(searchValue.toLowerCase())
+    )
+    .sort((a, b) => {
+      if (sortOption === SortOption.NameDesc) {
+        return b.title.localeCompare(a.title);
+      } else if (sortOption === SortOption.NameAsc) {
+        return a.title.localeCompare(b.title);
+      } else if (sortOption === SortOption.Theme) {
+        return (a.theme ?? "").localeCompare(b.theme ?? "");
+      } else if (sortOption === SortOption.DateDesc) {
+        return (
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        );
+      } else {
+        // SortOption.DateAsc
+        return (
+          new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+        );
+      }
+    });
 
   return (
     <div className="flex flex-col w-full min-h-screen  ">
@@ -69,6 +77,16 @@ const Index = ({ articles: unsortedArticles }: IndexProps) => {
               options={sortOptions}
             />
           </div>
+          {/* Ajouter un champ de texte pour la recherche */}
+          <div className="flex justify-center mb-8">
+            <input
+              type="text"
+              className="border p-2 rounded"
+              placeholder="Rechercher par titre ou thème"
+              value={searchValue}
+              onChange={(e) => setSearchValue(e.target.value)}
+            />
+          </div>
           {/*bouton pour créer un nouvel article */}
           <div className="flex justify-center mb-8">
             <button
@@ -79,7 +97,7 @@ const Index = ({ articles: unsortedArticles }: IndexProps) => {
             </button>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {sortedArticles.map((article) => (
+            {filteredAndSortedArticles.map((article) => (
               <div
                 className="bg-white rounded-lg shadow-lg p-4 cursor-pointer"
                 key={article.id}
@@ -95,7 +113,6 @@ const Index = ({ articles: unsortedArticles }: IndexProps) => {
                 <p className="text-gray-600">
                   {article.content?.substring(0, 100) ?? ""}
                 </p>
-                
               </div>
             ))}
           </div>
@@ -110,7 +127,9 @@ export default Index;
 
 export async function getServerSideProps() {
   const articles: Article[] = [];
-  const querySnapshot = await getDocs(collection(db, "articles"));
+  const querySnapshot = await getDocs(
+    query(collection(db, "articles"), orderBy("createdAt", "desc"), limit(20))
+  );
   querySnapshot.forEach((doc) => {
     articles.push({
       id: doc.id,
