@@ -10,10 +10,12 @@ import { Article } from "../../../types/type";
 const EditArticle = ({ article }: { article: Article }) => {
   const router = useRouter();
   const [title, setTitle] = useState(article?.title);
+  const [theme, setTheme] = useState(article?.theme);
   const [content, setContent] = useState(article?.content);
 
   const handleUpdate = async () => {
     await updateDoc(doc(db, "articles", article.id), {
+      theme: theme,
       title: title,
       content: content,
     });
@@ -35,6 +37,22 @@ const EditArticle = ({ article }: { article: Article }) => {
             }}
             className="bg-white rounded-lg shadow-md p-6"
           >
+            <div className="mb-4">
+              <label
+                htmlFor="theme"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Thème
+              </label>
+              <input
+                type="text"
+                name="theme"
+                id="theme"
+                value={theme}
+                onChange={(e) => setTheme(e.target.value)}
+                className="mt-1 block w-full rounded-md border-gray-300 focus:ring-blue-500 p-2"
+              />
+            </div>
             <div className="mb-4">
               <label
                 htmlFor="title"
