@@ -12,11 +12,11 @@ interface IndexProps {
   articles: Article[];
 }
 
-enum SortOption { DateAsc, DateDesc, NameAsc, NameDesc , Theme } // Définir les options de tri
+enum SortOption { DateDesc, DateAsc, NameAsc, NameDesc , Theme } // Définir les options de tri
 
 export const sortOptions = [
-  { label: "Date ⬆️", value: SortOption.DateAsc },
   { label: "Date ⬇️", value: SortOption.DateDesc },
+  { label: "Date ⬆️", value: SortOption.DateAsc },
   { label: "Nom ⬆️", value: SortOption.NameAsc },
   { label: "Nom ⬇️", value: SortOption.NameDesc },
   { label: "Thème", value: SortOption.Theme },
@@ -24,7 +24,7 @@ export const sortOptions = [
 
 const Index = ({ articles: unsortedArticles }: IndexProps) => {
   const router = useRouter();
-  const [sortOption, setSortOption] = useState<SortOption>(SortOption.DateAsc); // Définir l'état local pour l'option de tri
+  const [sortOption, setSortOption] = useState<SortOption>(SortOption.DateDesc); // Définir l'état local pour l'option de tri
 
   function handleArticleClick(articleId: string) {
     router.push(`/articles/${articleId}`);
@@ -52,7 +52,7 @@ const Index = ({ articles: unsortedArticles }: IndexProps) => {
     <div className="flex flex-col w-full min-h-screen  ">
       <Navbar />
       {/* Main content = contenu de la page d'accueil d'un blog */}
-      <main className="flex-grow">
+      <main className="flex-grow mb-8">
         {/* liste des articles */}
         <div className="container mx-auto px-4">
           <h1 className="text-4xl font-bold text-center my-8">Blog</h1>
@@ -77,7 +77,7 @@ const Index = ({ articles: unsortedArticles }: IndexProps) => {
                 key={article.id}
                 onClick={() => handleArticleClick(article.id)}
               >
-                <h2 className="text-xl font-bold">{article.title}</h2>
+                <h2 className="text-xl font-bold">{article.theme}: {article.title}</h2>
                 <p className="text-gray-600">{new Date(article.createdAt).toLocaleString()}</p>
                 {article.file && <p>{article.fileType}</p>}
                 <p className="text-gray-600">
@@ -107,6 +107,7 @@ export async function getServerSideProps() {
       file: doc.data().file || null,
       fileType: doc.data().fileType || null,
       createdAt: doc.data().createdAt.toDate().toISOString(), // Convertir en chaîne ISO
+      theme: doc.data().theme,
     })
   })
 

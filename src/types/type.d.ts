@@ -5,6 +5,7 @@ export interface Article {
   file: string;
   fileType: string;
   createdAt: string;
+  theme: string;
 }
 
 

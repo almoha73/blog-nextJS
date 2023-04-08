@@ -6,12 +6,18 @@ import Footer from "../../components/Footer";
 import { Article } from "../../types/type";
 import { db } from "../api/firebase";
 import { getDoc, doc } from "firebase/firestore";
+import hljs from "highlight.js";
+import "highlight.js/styles/default.css";
+import { useEffect } from "react";
 
 const ArticleDetail = ({ articles }: { articles: Article }) => {
   // Utilisez cet ID pour afficher les détails de l'article correspondant
-  const router = useRouter();
- // const { articleId } = router.query; // récupère l'ID de l'article à partir de l'URL
+  //const router = useRouter();
+  
 
+  useEffect(() => {
+    hljs.highlightAll();
+  }, []);
 
   return (
     <div className="flex flex-col w-full min-h-screen  ">
@@ -28,7 +34,7 @@ const ArticleDetail = ({ articles }: { articles: Article }) => {
                   key={articles.id}
                   className="p-6 mb-6 bg-white rounded-lg shadow-md"
                 >
-                  <h2 className="text-xl font-bold mb-2">{articles.title}</h2>
+                  <h2 className="text-xl font-bold mb-2">{articles.theme}: {articles.title}</h2>
 
                   {articles && articles.fileType ? (
                     articles.fileType.startsWith("image") ? (
@@ -69,7 +75,9 @@ const ArticleDetail = ({ articles }: { articles: Article }) => {
                     <p>Aucun fichier à afficher</p>
                   )}
 
-                  <p className="text-gray-600">{articles.content}</p>
+                  
+                  <div dangerouslySetInnerHTML={{ __html: hljs.highlightAuto(articles.content).value }} style={{ whiteSpace: "pre-wrap" }}></div>
+
                 </div>
               </article>
             )
@@ -83,7 +91,6 @@ const ArticleDetail = ({ articles }: { articles: Article }) => {
 };
 
 export default ArticleDetail;
-
 
 export async function getServerSideProps(context: any) {
   const articleId = context.query.articleId;
@@ -101,6 +108,7 @@ export async function getServerSideProps(context: any) {
       createdAt: docSnap.data().createdAt.toMillis(),
       file: docSnap.data().file ?? null,
       fileType: docSnap.data().fileType ?? null,
+      theme: docSnap.data().theme,
     };
   } else {
     console.log("No such document!");
