@@ -26,7 +26,7 @@ interface ArticleDetailProps {
 const ArticleDetail = ({ articles }: ArticleDetailProps) => {
   // Utilisez cet ID pour afficher les détails de l'article correspondant
   const router = useRouter();
-  const [isMobile, setIsMobile] = useState(false);
+  
 
   const handleDelete = async () => {
     if (window.confirm("Êtes-vous sûr de vouloir supprimer cet article ?")) {
@@ -38,24 +38,6 @@ const ArticleDetail = ({ articles }: ArticleDetailProps) => {
   const handleEdit = () => {
     router.push(`/articles/${articles.id}/edit`);
   };
-
-
-
-
-  useEffect(() => {
-    const checkIfMobile = () => {
-      const isMobile = window.matchMedia("(max-width: 767px)").matches;
-      setIsMobile(isMobile);
-    };
-
-    checkIfMobile();
-
-    window.addEventListener("resize", checkIfMobile);
-
-    return () => {
-      window.removeEventListener("resize", checkIfMobile);
-    };
-  }, [articles.content]);
 
   return (
     <div className="flex flex-col min-h-screen overflow-x-hidden w-full">
