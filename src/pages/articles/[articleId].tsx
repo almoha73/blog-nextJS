@@ -12,7 +12,8 @@ import { Light as SyntaxHighlighter } from "react-syntax-highlighter";
 import javascript from "react-syntax-highlighter/dist/cjs/languages/hljs/javascript";
 import xml from "react-syntax-highlighter/dist/cjs/languages/hljs/xml";
 import css from "react-syntax-highlighter/dist/cjs/languages/hljs/css";
-
+import ArticleCard from "@/components/ArticleCard";
+import CustomButton from "@/components/CustomButton";
 
 SyntaxHighlighter.registerLanguage("javascript", javascript);
 SyntaxHighlighter.registerLanguage("xml", xml);
@@ -37,6 +38,9 @@ const ArticleDetail = ({ articles }: ArticleDetailProps) => {
   const handleEdit = () => {
     router.push(`/articles/${articles.id}/edit`);
   };
+
+
+
 
   useEffect(() => {
     const checkIfMobile = () => {
@@ -70,58 +74,28 @@ const ArticleDetail = ({ articles }: ArticleDetailProps) => {
               </div>
             </div>
             <div className="flex">
-              <button
-                className={`${
-                  isMobile
-                    ? " bg-[#82E4D0] text-white"
-                    : "bg-[#82E4D0] text-white"
-                } font-bold py-1 md:px-4 px-2 rounded mr-2 ${
-                  isMobile ? "text-lg " : ""
-                }`}
+              <CustomButton
+                bgColor="#82E4D0"
+                textColor="white"
+                text="Edit"
+                type="button"
+                mobileText="✎"
                 onClick={handleEdit}
-              >
-                {isMobile ? "✎" : "Edit"}
-              </button>
-              <button
-                className={`${
-                  isMobile ? " bg-[#BD99A0] text-white" : "bg-[#BD99A0] text-white"
-                } font-bold py-1 md:px-4 px-2 rounded ${
-                  isMobile ? "text-lg " : ""
-                }`}
+              />
+              <CustomButton
+                bgColor="#BD99A0"
+                textColor="white"
+                text="Supprimer"
+                type="button"
+                mobileText="✕"
                 onClick={handleDelete}
-              >
-                {isMobile ? "✕" : "Supprimer"}
-              </button>
+              />
             </div>
           </div>
           {!articles ? (
             <p>Chargement...</p>
           ) : (
-            articles && (
-              <article className="mx-auto w-[300px] sm:w-11/12 ">
-                <div
-                  key={articles.id}
-                  className="p-6 mb-6 bg-white rounded-lg shadow-md "
-                >
-                  {articles && articles.fileType ? (
-                    <FileDisplay
-                      file={articles.file}
-                      fileType={articles.fileType}
-                      title={articles.title}
-                    />
-                  ) : (
-                    <p className="text-[#245165] mb-2 bg-[#FBDDBE] inline-block px-2 py-1 text-xs">
-                      Cet article ne contient pas de pièces jointes
-                    </p>
-                  )}
-
-                  {/* si le contenu de l'article contient du code, on affiche ce bout de code avec la syntaxe colorée et le reste normal, sinon on affiche l'article en prose */}
-                  <p className=" text-justify whitespace-break-spaces		break-words bg-gray-100 p-2">
-                    {articles.content}
-                  </p>
-                </div>
-              </article>
-            )
+            articles && <ArticleCard article={articles} />
           )}
         </div>
       </main>

@@ -7,6 +7,7 @@ import { db } from "../../api/firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { Article } from "../../../types/type";
 import autosize from "autosize";
+import CustomButton from "@/components/CustomButton";
 
 const EditArticle = ({ article }: { article: Article }) => {
   const router = useRouter();
@@ -93,12 +94,14 @@ const EditArticle = ({ article }: { article: Article }) => {
                 // style={{ height: "100px" }}
               ></textarea>
             </div>
-            <button
-              type="submit"
-              className="bg-[#BD99A0] text-white font-bold py-2 md:px-4 px-2 rounded mr-2"
-            >
-              Enregistrer
-            </button>
+            <CustomButton
+              bgColor="#BD99A0"
+              textColor="white"
+              text="Enregistrer"
+              type="button"
+              mobileText="Enregistrer" onClick={handleUpdate }                
+              />
+            
           </form>
         </div>
       </main>
