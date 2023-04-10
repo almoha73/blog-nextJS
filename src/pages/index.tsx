@@ -99,7 +99,7 @@ const Index = ({ articles }: IndexProps) => {
                 textColor="white"
                 text="Créer un nouveau pense-bête"
                 type="button"
-                mobileText="✎"
+                mobileText="Créer un nouveau pense-bête"
                 onClick={() => router.push("/articles/new")}/>
             {/*  */}
           </div>
