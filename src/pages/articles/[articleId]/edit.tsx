@@ -59,7 +59,7 @@ const EditArticle = ({ article }: { article: Article }) => {
                 id="theme"
                 value={theme}
                 onChange={(e) => setTheme(e.target.value)}
-                className="mt-1 block w-full rounded-md border-gray-300 focus:ring-blue-500 p-2"
+                className="mt-1 block w-full rounded-md border-gray-300 focus:ring-blue-500 p-2 border"
               />
             </div>
             <div className="mb-4">
@@ -75,7 +75,7 @@ const EditArticle = ({ article }: { article: Article }) => {
                 id="title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="mt-1 block w-full rounded-md border-gray-300 focus:ring-blue-500 p-2"
+                className="mt-1 block w-full rounded-md border-gray-300 focus:ring-blue-500 p-2 border"
               />
             </div>
             <div className="mb-4">
@@ -90,8 +90,8 @@ const EditArticle = ({ article }: { article: Article }) => {
                 id="content"
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
-                className="mt-1 block w-full rounded-md border-gray-300 focus:ring-blue-500 p-2"
-                // style={{ height: "100px" }}
+                className="mt-1 block w-full rounded-md border-gray-300 focus:ring-blue-500 p-2 border"
+                
               ></textarea>
             </div>
             <CustomButton

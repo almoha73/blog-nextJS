@@ -41,9 +41,9 @@ const ArticleDetail = ({ articles }: ArticleDetailProps) => {
   return (
     <div className="flex flex-col min-h-screen overflow-x-hidden w-full">
       <Navbar />
-      <main className="flex-1 ">
-        <div className="max-w-4xl mx-auto py-6">
-          <div className="flex justify-between items-center mb-6 mx-2 border p-2 bg-white">
+      <main className="flex-1 w-full">
+        <div className=" mx-auto py-6">
+          <div className="flex justify-between items-center mb-6 w-11/12 mx-auto border p-2 bg-white">
             <div className="lg:text-3xl font-bold break-words">
               <div className=" mr-2 p-1 mb-2">
                 <span className="bg-[#A7EDD6] mr-2 px-2">Thème</span>

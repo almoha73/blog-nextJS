@@ -9,8 +9,8 @@ interface ArticleCardProps {
 
 const ArticleCard: React.FC<ArticleCardProps> = ({ article }) => {
   return (
-    <article className="mx-auto w-[300px] sm:w-11/12 ">
-      <div key={article.id} className="p-6 mb-6 bg-white rounded-lg shadow-md ">
+    <article className="mx-auto w-11/12 ">
+      <div key={article.id} className="mb-6 bg-white rounded-lg shadow-md ">
         <p className=" text-justify whitespace-break-spaces break-words bg-gray-100 p-2">
           {article.content}
         </p>
