@@ -14,16 +14,16 @@ interface IndexProps {
 enum SortOption {
   DateDesc,
   DateAsc,
-  NameAsc,
-  NameDesc,
+  TitreAsc,
+  TitreDesc,
   Theme,
 } // Définir les options de tri
 
 export const sortOptions = [
   { label: "Date ⬇️", value: SortOption.DateDesc },
   { label: "Date ⬆️", value: SortOption.DateAsc },
-  { label: "Nom ⬆️", value: SortOption.NameAsc },
-  { label: "Nom ⬇️", value: SortOption.NameDesc },
+  { label: "Titre ⬆️", value: SortOption.TitreAsc },
+  { label: "Titre ⬇️", value: SortOption.TitreDesc },
   { label: "Thème", value: SortOption.Theme },
 ];
 
@@ -40,13 +40,17 @@ const Index = ({ articles }: IndexProps) => {
   const filteredAndSortedArticles = articles
     .filter(
       (article) =>
-        article.title.toLowerCase().includes(searchValue.toLowerCase()) ||
-        (article.theme ?? "").toLowerCase().includes(searchValue.toLowerCase())
+        article.title
+          .toLowerCase()
+          .includes(searchValue.trim().toLowerCase()) ||
+        (article.theme ?? "")
+          .toLowerCase()
+          .includes(searchValue.trim().toLowerCase())
     )
     .sort((a, b) => {
-      if (sortOption === SortOption.NameDesc) {
+      if (sortOption === SortOption.TitreDesc) {
         return b.title.localeCompare(a.title);
-      } else if (sortOption === SortOption.NameAsc) {
+      } else if (sortOption === SortOption.TitreAsc) {
         return a.title.localeCompare(b.title);
       } else if (sortOption === SortOption.Theme) {
         return (a.theme ?? "").localeCompare(b.theme ?? "");
@@ -69,7 +73,7 @@ const Index = ({ articles }: IndexProps) => {
       <main className="flex-grow mb-8">
         {/* liste des articles */}
         <div className="container mx-auto px-4">
-          <h1 className="text-4xl font-bold text-center my-8">Blog</h1>
+          <h1 className="text-4xl font-bold text-center my-8 text-white">Pense-Bête</h1>
           {/* Menu déroulant pour trier les articles */}
           <div className="flex justify-center mb-8">
             <DropdownMenu
@@ -90,10 +94,10 @@ const Index = ({ articles }: IndexProps) => {
           {/*bouton pour créer un nouvel article */}
           <div className="flex justify-center mb-8">
             <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              className="bg-[#E7BDB5] text-[#1B3D50] hover:bg-[#1B3D50] hover:text-[#E7BDB5]  font-bold py-2 px-4 rounded"
               onClick={() => router.push("/articles/new")}
             >
-              Créer un nouvel article
+              Créer un nouveau pense-bête
             </button>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -103,14 +107,21 @@ const Index = ({ articles }: IndexProps) => {
                 key={article.id}
                 onClick={() => handleArticleClick(article.id)}
               >
-                <h2 className="text-xl font-bold">
-                  {article.theme}: {article.title}
-                </h2>
-                <p className="text-gray-600">
+                <div className="text-xl font-bold">
+                  <div className=" mr-2  mb-3">
+                    <span className="bg-blue-100 mr-2 p-1">Thème</span>
+                    {articles && article.theme}
+                  </div>
+                  <div className=" mr-2 mb-2">
+                    <span className="bg-orange-100 mr-2 p-1">Titre</span>
+                    {articles && article.title}
+                  </div>
+                </div>
+                <p className="text-gray-600 bg-red-100 inline-block p-1 mb-4">
                   {new Date(article.createdAt).toLocaleString()}
                 </p>
                 {article.file && <p>{article.fileType}</p>}
-                <p className="text-gray-600">
+                <p className="text-gray-600 whitespace-normal break-words bg-gray-100 p-2 rounded-xl">
                   {article.content?.substring(0, 100) ?? ""}
                 </p>
               </div>
