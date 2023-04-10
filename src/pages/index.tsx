@@ -6,6 +6,7 @@ import { db } from "./api/firebase";
 import { collection, getDocs, orderBy, query, limit } from "firebase/firestore";
 import { Article } from "../types/type";
 import DropdownMenu from "../components/DropdownMenu";
+import CustomButton from "@/components/CustomButton";
 
 interface IndexProps {
   articles: Article[];
@@ -93,12 +94,14 @@ const Index = ({ articles }: IndexProps) => {
           </div>
           {/*bouton pour créer un nouvel article */}
           <div className="flex justify-center mb-8">
-            <button
-              className="bg-[#E7BDB5] text-[#1B3D50] hover:bg-[#1B3D50] hover:text-[#E7BDB5]  font-bold py-2 px-4 rounded"
-              onClick={() => router.push("/articles/new")}
-            >
-              Créer un nouveau pense-bête
-            </button>
+            <CustomButton
+                bgColor="#82E4D0"
+                textColor="white"
+                text="Créer un nouveau pense-bête"
+                type="button"
+                mobileText="✎"
+                onClick={() => router.push("/articles/new")}/>
+            {/*  */}
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {filteredAndSortedArticles.map((article) => (

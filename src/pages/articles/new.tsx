@@ -109,7 +109,7 @@ const NewArticle = () => {
                 onChange={(e) =>
                   setFile(e.target.files ? e.target.files[0] : null)
                 }
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
               />
             </div>
 
