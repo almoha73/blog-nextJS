@@ -26,7 +26,6 @@ interface ArticleDetailProps {
 const ArticleDetail = ({ articles }: ArticleDetailProps) => {
   // Utilisez cet ID pour afficher les détails de l'article correspondant
   const router = useRouter();
-  
 
   const handleDelete = async () => {
     if (window.confirm("Êtes-vous sûr de vouloir supprimer cet article ?")) {
@@ -60,16 +59,16 @@ const ArticleDetail = ({ articles }: ArticleDetailProps) => {
                 bgColor="#82E4D0"
                 textColor="white"
                 text="Edit"
-                type="button"
                 mobileText="✎"
+                type="button"
                 onClick={handleEdit}
               />
               <CustomButton
                 bgColor="#BD99A0"
                 textColor="white"
                 text="Supprimer"
-                type="button"
                 mobileText="✕"
+                type="button"
                 onClick={handleDelete}
               />
             </div>

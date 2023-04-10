@@ -26,7 +26,7 @@ const EditArticle = ({ article }: { article: Article }) => {
 
   // Appel de la fonction autosize sur le textarea
   useEffect(() => {
-    autosize(document.getElementById("content")  as HTMLTextAreaElement);
+    autosize(document.getElementById("content") as HTMLTextAreaElement);
   }, []);
 
   return (
@@ -98,10 +98,9 @@ const EditArticle = ({ article }: { article: Article }) => {
               bgColor="#BD99A0"
               textColor="white"
               text="Enregistrer"
-              type="button"
-              mobileText="Enregistrer" onClick={handleUpdate }                
-              />
-            
+              type="submit"
+              onClick={handleUpdate}
+            />
           </form>
         </div>
       </main>

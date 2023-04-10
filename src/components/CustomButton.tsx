@@ -6,7 +6,7 @@ interface CustomButtonProps {
   textColor: string;
   text: string;
   mobileText?: string;
-  type: "button" | "submit" | "reset";
+  type: "button" | "submit";
   onClick: () => void;
 }
 
@@ -37,7 +37,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
 
   return (
     <button
-        type={type}
+      type={type}
       className={`bg-[${bgColor}] text-${textColor} font-bold py-1 md:px-4 px-2 rounded ml-2 ${
         isMobile ? "text-lg " : ""
       }`}
