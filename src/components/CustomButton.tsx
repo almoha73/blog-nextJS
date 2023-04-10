@@ -38,7 +38,8 @@ const CustomButton: React.FC<CustomButtonProps> = ({
   return (
     <button
       type={type}
-      className={`bg-[${bgColor}] text-${textColor} font-bold py-1 md:px-4 px-2 rounded ml-2 ${
+      style={{ backgroundColor: bgColor, color: textColor }}
+      className={`font-bold py-1 md:px-4 px-2 rounded ml-2 ${
         isMobile ? "text-lg " : ""
       }`}
       onClick={onClick}
