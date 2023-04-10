@@ -16,7 +16,7 @@ const FileDisplay: React.FC<FileDisplayProps> = ({ file, fileType, title }) => {
         width={400}
         height={400}
         quality={100}
-        className="w-40 h-40"
+        
         style={{ objectFit: "cover" }}
       />
     );

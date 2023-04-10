@@ -1,12 +1,10 @@
 import React from "react";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import { Article } from "../../types/type";
 import { db } from "../api/firebase";
 import { getDoc, doc, deleteDoc } from "firebase/firestore";
-import hljs from "highlight.js";
 import "highlight.js/styles/default.css";
 import { useEffect, useState, useRef } from "react";
 import FileDisplay from "@/components/FileDisplay";
@@ -14,7 +12,7 @@ import { Light as SyntaxHighlighter } from "react-syntax-highlighter";
 import javascript from "react-syntax-highlighter/dist/cjs/languages/hljs/javascript";
 import xml from "react-syntax-highlighter/dist/cjs/languages/hljs/xml";
 import css from "react-syntax-highlighter/dist/cjs/languages/hljs/css";
-import { docco } from "react-syntax-highlighter/dist/cjs/styles/hljs";
+
 
 SyntaxHighlighter.registerLanguage("javascript", javascript);
 SyntaxHighlighter.registerLanguage("xml", xml);

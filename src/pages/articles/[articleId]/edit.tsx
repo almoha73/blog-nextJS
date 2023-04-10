@@ -6,6 +6,7 @@ import Footer from "../../../components/Footer";
 import { db } from "../../api/firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { Article } from "../../../types/type";
+import autosize from "autosize";
 
 const EditArticle = ({ article }: { article: Article }) => {
   const router = useRouter();
@@ -22,13 +23,20 @@ const EditArticle = ({ article }: { article: Article }) => {
     router.push(`/articles/${article.id}`);
   };
 
+  // Appel de la fonction autosize sur le textarea
+  useEffect(() => {
+    autosize(document.getElementById("content")  as HTMLTextAreaElement);
+  }, []);
+
   return (
     <div className="flex flex-col min-h-screen overflow-x-hidden w-full">
       <Navbar />
-      <main className="flex-1 bg-gray-100">
+      <main className="flex-1">
         <div className="max-w-4xl mx-auto py-6">
           <div className="flex justify-between items-center mb-6 mx-2">
-            <h1 className="lg:text-3xl font-bold">Modifier l&apos;article</h1>
+            <h1 className="lg:text-3xl font-bold text-white">
+              Modifier l&apos;article
+            </h1>
           </div>
           <form
             onSubmit={(e) => {
@@ -79,15 +87,15 @@ const EditArticle = ({ article }: { article: Article }) => {
               <textarea
                 name="content"
                 id="content"
-                rows={20}
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
                 className="mt-1 block w-full rounded-md border-gray-300 focus:ring-blue-500 p-2"
+                // style={{ height: "100px" }}
               ></textarea>
             </div>
             <button
               type="submit"
-              className="bg-blue-500 text-white font-bold py-2 md:px-4 px-2 rounded mr-2"
+              className="bg-[#BD99A0] text-white font-bold py-2 md:px-4 px-2 rounded mr-2"
             >
               Enregistrer
             </button>

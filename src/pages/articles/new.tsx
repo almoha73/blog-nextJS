@@ -61,7 +61,7 @@ const NewArticle = () => {
       <Navbar />
       <main className="flex-grow my-8">
         <div className="container mx-auto px-4">
-          <h1 className="text-4xl font-bold text-center my-8">
+          <h1 className="text-4xl font-bold text-center my-8 text-white">
             Créer un nouvel article
           </h1>
           {error && (
@@ -71,20 +71,7 @@ const NewArticle = () => {
           )}
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2">
-                Titre
-              </label>
-              <input
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                required
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2">
-                Thème
-              </label>
+              <label className="block text-white font-bold mb-2">Thème</label>
               <input
                 type="text"
                 value={theme}
@@ -94,18 +81,26 @@ const NewArticle = () => {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2">
-                Contenu
-              </label>
+              <label className="block text-white font-bold mb-2">Titre</label>
+              <input
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                required
+              />
+            </div>
+
+            <div className="mb-4">
+              <label className="block text-white font-bold mb-2">Contenu</label>
               <textarea
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
                 className="shadow appearance-none border rounded w-full h-80  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                required
+                
               ></textarea>
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2">
+              <label className="block text-white font-bold mb-2">
                 Ajouter un fichier
               </label>
               <input
@@ -118,7 +113,6 @@ const NewArticle = () => {
               />
             </div>
 
-           
             <div className="flex justify-center">
               <button
                 type="submit"

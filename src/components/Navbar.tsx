@@ -1,20 +1,25 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-
+import { useRouter } from "next/router";
 
 const Navbar = () => {
-
   //state pour changer le menu burger en croix et inversement etafficher le menu en responsive
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const router = useRouter();
   return (
     <>
       {/* navbar responsive avec tailwind */}
       <div className="flex flex-col md:flex-row md:justify-between md:items-center bg-[#E7BDB5] p-2 text-[#1B3D50]">
         <div className="flex justify-between items-center">
-          <Image src="https://firebasestorage.googleapis.com/v0/b/blog-d70e1.appspot.com/o/almoha_icon_pencil_b74d96a1-5da9-42df-b6d0-7bd90295df42.png?alt=media&token=f2ce9b53-36b0-4ea3-a9e8-9123d99f3a78" alt="logo" width={40} height={40} className="rounded-lg"/>
+          <Image
+            src="https://firebasestorage.googleapis.com/v0/b/blog-d70e1.appspot.com/o/almoha_icon_pencil_b74d96a1-5da9-42df-b6d0-7bd90295df42.png?alt=media&token=f2ce9b53-36b0-4ea3-a9e8-9123d99f3a78"
+            alt="logo"
+            width={40}
+            height={40}
+            className="rounded-lg"
+          />
           <div className="md:hidden">
             {/* menu burger */}
             {isMenuOpen ? (
@@ -53,17 +58,12 @@ const Navbar = () => {
           </div>
         </div>
         <nav className="flex flex-col md:flex-row md:items-center hidden md:block -mx-4">
-          <Link
-            className="my-1 mx-4 text-sm font-medium  hover:text-gray-300"
-            href="/"
-          >
-            Home
+          <Link href="/" passHref className={`my-1 mx-4 text-sm font-medium hover:text-gray-100 ${router.pathname === "/" ? "text-blue-500" : ""}`}>
+           Accueil
           </Link>
-          <Link
-            className="my-1 mx-4 text-sm font-medium hover:text-gray-300"
-            href="#"
-          >
-            Contact
+
+          <Link href="/contact" passHref className={`my-1 mx-4 text-sm font-medium hover:text-gray-100 ${router.pathname === "/contact" ? "text-blue-500" : ""}`}>
+           Contact
           </Link>
         </nav>
       </div>
@@ -85,7 +85,7 @@ const Navbar = () => {
             </Link>
             <Link
               className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700"
-              href="#"
+              href="/contact"
             >
               Contact
             </Link>
