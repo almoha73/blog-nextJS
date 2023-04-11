@@ -14,8 +14,6 @@ const NewArticle = () => {
   const [error, setError] = useState("");
   const [file, setFile] = useState<File | null>(null);
 
-  //const articlesRef = collection(db, "articles");
-
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     setIsLoading(true);

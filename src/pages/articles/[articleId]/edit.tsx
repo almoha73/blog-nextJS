@@ -14,16 +14,31 @@ const EditArticle = ({ article }: { article: Article }) => {
   const [title, setTitle] = useState(article?.title);
   const [theme, setTheme] = useState(article?.theme);
   const [content, setContent] = useState(article?.content);
+  const [isUpdating, setIsUpdating] = useState(false);
+  const [isUpdated, setIsUpdated] = useState(false);
 
   const handleUpdate = async () => {
-    await updateDoc(doc(db, "articles", article.id), {
-      theme: theme,
-      title: title,
-      content: content,
-    });
-    router.push(`/articles/${article.id}`);
+    setIsUpdating(true);
+    try {
+      await updateDoc(doc(db, "articles", article.id), {
+        theme: theme,
+        title: title,
+        content: content,
+      });
+      setIsUpdated(true);
+    } catch (error) {
+      console.error("Failed to update the article:", error);
+    } finally {
+      setIsUpdating(false);
+    }
   };
 
+  // Redirection vers la page de l'article une fois l'article modifié
+  useEffect(() => {
+    if (isUpdated) {
+      router.push(`/articles/${article.id}`);
+    }
+  }, [isUpdated, router, article]);
   // Appel de la fonction autosize sur le textarea
   useEffect(() => {
     autosize(document.getElementById("content") as HTMLTextAreaElement);
@@ -91,7 +106,6 @@ const EditArticle = ({ article }: { article: Article }) => {
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
                 className="mt-1 block w-full rounded-md border-gray-300 focus:ring-blue-500 p-2 border"
-                
               ></textarea>
             </div>
             <CustomButton

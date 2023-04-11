@@ -41,7 +41,7 @@ const Index = ({ articles }: IndexProps) => {
   const filteredAndSortedArticles = articles
     .filter(
       (article) =>
-        article.title
+        (article.title ?? "")
           .toLowerCase()
           .includes(searchValue.trim().toLowerCase()) ||
         (article.theme ?? "")
@@ -74,7 +74,7 @@ const Index = ({ articles }: IndexProps) => {
       <main className="flex-grow mb-8">
         {/* liste des articles */}
         <div className="container mx-auto px-4">
-          <h1 className="text-4xl font-bold text-center my-8 text-white">🧠 Cerveau en vrac !</h1>
+          <h1 className="text-4xl font-bold text-center my-8 text-white">🧠 Cerveau en vrac ! 🧠</h1>
           {/* Menu déroulant pour trier les articles */}
           <div className="flex justify-center mb-8">
             <DropdownMenu
