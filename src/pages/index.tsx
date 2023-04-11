@@ -74,7 +74,7 @@ const Index = ({ articles }: IndexProps) => {
       <main className="flex-grow mb-8">
         {/* liste des articles */}
         <div className="container mx-auto px-4">
-          <h1 className="text-4xl font-bold text-center my-8 text-white">Pense-Bête</h1>
+          <h1 className="text-4xl font-bold text-center my-8 text-white">🧠 Cerveau en vrac !</h1>
           {/* Menu déroulant pour trier les articles */}
           <div className="flex justify-center mb-8">
             <DropdownMenu
@@ -97,7 +97,7 @@ const Index = ({ articles }: IndexProps) => {
             <CustomButton
                 bgColor="#82E4D0"
                 textColor="white"
-                text="Créer un nouveau pense-bête"
+                text="Créer un nouveau neurone 😃"
                 type="button"
                 onClick={() => router.push("/articles/new")}/>
             {/*  */}
