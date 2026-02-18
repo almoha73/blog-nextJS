@@ -39,18 +39,18 @@ const DropdownMenu = ({ options, onSelect }: DropdownMenuProps) => {
       <div>
         <button
           type="button"
-          className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500"
+          className="glass-input inline-flex justify-center items-center w-full !px-5 !py-2.5 text-sm font-bold text-slate-700 hover:bg-white/80"
           id="options-menu"
           aria-haspopup="true"
           aria-expanded="true"
           onClick={() => setIsOpen(!isOpen)}
         >
           {selectedOption ? selectedOption.label : ""}
-          <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
+          <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5 opacity-50" aria-hidden="true" />
         </button>
       </div>
       {isOpen && (
-        <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <div className="glass-card absolute right-0 mt-3 w-56 !rounded-xl !bg-white overflow-hidden z-[100] shadow-2xl border border-slate-200">
           <div
             className="py-1"
             role="menu"
@@ -61,7 +61,7 @@ const DropdownMenu = ({ options, onSelect }: DropdownMenuProps) => {
               <button
                 key={option.label}
                 onClick={() => handleOptionClick(option)}
-                className="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 text-left"
+                className="block w-full px-4 py-3 text-sm font-semibold text-slate-600 hover:bg-teal-50 hover:text-teal-600 text-left transition-colors"
                 role="menuitem"
               >
                 {option.label}

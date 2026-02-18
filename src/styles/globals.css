@@ -2,15 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Ajoutez vos styles personnalisés ici */
-/* Ajoutez un background à tous le site*/
-
-body {
-    background: #f6f6f6 url('https://firebasestorage.googleapis.com/v0/b/blog-d70e1.appspot.com/o/almoha_background_for_blog_site_28dbc0bf-09e6-4f68-9901-9de3d054b043.png?alt=media&token=810c8889-c7f3-4b92-a66e-8cfb0804f291') no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
+@layer base {
+  body {
+    @apply min-h-screen text-slate-900 antialiased selection:bg-teal-100 selection:text-teal-900;
+    background: fixed linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('/images/brain_bg.png') no-repeat center center;
     background-size: cover;
   }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-white/70 backdrop-blur-md border border-white/40 shadow-xl rounded-2xl transition-all duration-300;
+  }
   
-  
+  .glass-card:hover {
+    @apply bg-white/80 shadow-2xl scale-[1.02];
+  }
+
+  .glass-input {
+    @apply bg-white/50 backdrop-blur-sm border border-white/60 focus:bg-white/90 focus:ring-2 focus:ring-teal-400 outline-none transition-all duration-200 rounded-xl px-4 py-2;
+  }
+
+  .neuron-btn {
+    @apply bg-gradient-to-r from-teal-400 to-emerald-400 text-white font-bold py-3 px-6 rounded-2xl shadow-lg shadow-teal-200/50 hover:shadow-xl hover:shadow-teal-300/60 hover:-translate-y-1 active:scale-95 transition-all duration-200;
+  }
+}
+
+/* Custom animations */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}

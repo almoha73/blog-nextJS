@@ -7,22 +7,21 @@ import { docco } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 
 interface ArticleCardProps {
   article: Article;
+  showFile?: boolean; // Nouvelle prop pour décider d'afficher le fichier ou non
 }
 
 function isCodeBlock(text: string) {
   return text.startsWith("<code>") && text.endsWith("</code>");
 }
 
-const ArticleCard: React.FC<ArticleCardProps> = ({ article }) => {
+const ArticleCard: React.FC<ArticleCardProps> = ({ article, showFile = false }) => {
   const [content, setContent] = useState("");
   const [blocks, setBlocks] = useState<React.ReactNode[]>([]);
 
-  // // Mettez à jour le contenu lorsque `article.content` change
   useEffect(() => {
     setContent(article.content);
   }, [article.content]);
 
-  // Mettez à jour les blocs lorsque `content` change
   useEffect(() => {
     setBlocks(
       content.split("\n\n").map((block, index) => {
@@ -41,7 +40,7 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ article }) => {
           );
         } else {
           return (
-            <p className="whitespace-pre-wrap break-word prose" key={index}>
+            <p className="whitespace-pre-wrap break-word prose text-slate-700 leading-relaxed mb-4" key={index}>
               {block}
             </p>
           );
@@ -51,23 +50,21 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ article }) => {
   }, [content, article]);
 
   return (
-    <article className="mx-auto w-11/12 ">
-      <div key={article.id} className="mb-6 bg-white rounded-lg shadow-md p-3">
-        <div>{blocks}</div>
+    <div key={article.id} className="w-full">
+      <div className="mb-2">
+        {blocks}
+      </div>
 
-        {article && article.fileType ? (
+      {showFile && article && article.file && article.fileType && (
+        <div className="mt-8 pt-8 border-t border-slate-100">
           <FileDisplay
             file={article.file}
             fileType={article.fileType}
             title={article.title}
           />
-        ) : (
-          <p className="text-[#245165] mb-2 bg-[#FBDDBE] inline-block px-2 py-1 text-xs">
-            Cet article ne contient pas de pièces jointes
-          </p>
-        )}
-      </div>
-    </article>
+        </div>
+      )}
+    </div>
   );
 };
 

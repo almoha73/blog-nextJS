@@ -1,21 +1,20 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import{ getFirestore } from "@firebase/firestore";
+import { initializeApp, getApps, getApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyApBla-G0NhE2ealBXM6kca6D_SncqWh64",
-  authDomain: "blog-d70e1.firebaseapp.com",
-  projectId: "blog-d70e1",
-  storageBucket: "blog-d70e1.appspot.com",
-  messagingSenderId: "839978059674",
-  appId: "1:839978059674:web:838775537173d4f7799c23"
+  apiKey: "AIzaSyCqhSwnswhGINwF4Z9sPMBJalUQvM2-svU",
+  authDomain: "brainblog-fb180.firebaseapp.com",
+  projectId: "brainblog-fb180",
+  storageBucket: "brainblog-fb180.firebasestorage.app",
+  messagingSenderId: "332162790914",
+  appId: "1:332162790914:web:9b77632eb6517bc2db991b",
+  measurementId: "G-SP1F1MEDLV"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+// Initialize Firebase (check if already initialized for Next.js HMR)
+const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const storage = getStorage(app);
