@@ -75,7 +75,7 @@ const FileDisplay: React.FC<FileDisplayProps> = ({ file, fileType, title }) => {
         <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 flex justify-between items-center">
           <span className="text-slate-600 font-medium italic">Type de fichier non pris en charge ({fileType})</span>
           <a href={file} target="_blank" rel="noopener noreferrer" className="text-teal-600 font-bold underline">
-            Forcer l'ouverture
+            Forcer l&apos;ouverture
           </a>
         </div>
       );

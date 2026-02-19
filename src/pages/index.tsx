@@ -154,7 +154,7 @@ const Index = () => {
               </div>
               <h2 className="text-2xl font-black text-slate-900 mb-2">Supprimer ce neurone ?</h2>
               <p className="text-slate-500 font-medium">
-                Le neurone <span className="font-bold text-slate-700">"{articleToDelete.title}"</span> sera supprimé définitivement. Cette action est irréversible.
+                Le neurone <span className="font-bold text-slate-700">&quot;{articleToDelete.title}&quot;</span> sera supprimé définitivement. Cette action est irréversible.
               </p>
             </div>
             <div className="flex gap-3">

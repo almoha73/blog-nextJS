@@ -133,7 +133,7 @@ const ArticleDetail = () => {
               </div>
               <h2 className="text-2xl font-black text-slate-900 mb-2">Supprimer ce neurone ?</h2>
               <p className="text-slate-500 font-medium">
-                Le neurone <span className="font-bold text-slate-700">"{article.title}"</span> sera supprimé définitivement. Cette action est irréversible.
+                Le neurone <span className="font-bold text-slate-700">&quot;{article.title}&quot;</span> sera supprimé définitivement. Cette action est irréversible.
               </p>
             </div>
             <div className="flex gap-3">
@@ -184,8 +184,8 @@ const ArticleDetail = () => {
                   onClick={() => setShowConfirmModal(true)}
                   disabled={isDeleting}
                   className={`flex-1 md:flex-none px-6 py-3 font-bold rounded-2xl border transition-all flex items-center justify-center gap-2 shadow-sm ${isDeleting
-                      ? "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed"
-                      : "bg-red-50 hover:bg-red-100 text-red-500 border-red-100"
+                    ? "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed"
+                    : "bg-red-50 hover:bg-red-100 text-red-500 border-red-100"
                     }`}
                 >
                   {isDeleting ? (
