@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import FileDisplay from "@/components/FileDisplay";
 import { Article } from "@/types/type";
 import { Light as SyntaxHighlighter } from "react-syntax-highlighter";
-import { docco } from "react-syntax-highlighter/dist/cjs/styles/hljs";
+import { atomOneDark as dark } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 
 interface ArticleCardProps {
   article: Article;
@@ -31,7 +31,13 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ article, showFile = false }) 
           return (
             <SyntaxHighlighter
               key={index}
-              style={docco}
+              style={dark}
+              customStyle={{
+                borderRadius: "1rem",
+                padding: "1.5rem",
+                backgroundColor: "rgba(2, 6, 23, 0.5)",
+                border: "1px solid rgba(255, 255, 255, 0.05)"
+              }}
               wrapLines={true}
               wrapLongLines={true}
             >
@@ -40,7 +46,7 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ article, showFile = false }) 
           );
         } else {
           return (
-            <p className="whitespace-pre-wrap break-word prose text-slate-700 leading-relaxed mb-4" key={index}>
+            <p className="whitespace-pre-wrap break-word prose text-slate-300 leading-relaxed mb-6 font-medium" key={index}>
               {block}
             </p>
           );
@@ -56,7 +62,7 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ article, showFile = false }) 
       </div>
 
       {showFile && article && article.file && article.fileType && (
-        <div className="mt-8 pt-8 border-t border-slate-100">
+        <div className="mt-8 pt-8 border-t border-slate-800/60">
           <FileDisplay
             file={article.file}
             fileType={article.fileType}

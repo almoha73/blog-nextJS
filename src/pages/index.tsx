@@ -145,23 +145,23 @@ const Index = () => {
       {articleToDelete && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center"
-          style={{ backgroundColor: "rgba(0,0,0,0.4)", backdropFilter: "blur(4px)" }}
+          style={{ backgroundColor: "rgba(2, 6, 23, 0.8)", backdropFilter: "blur(12px)" }}
         >
-          <div className="bg-white rounded-3xl shadow-2xl p-8 max-w-md w-full mx-4 border border-red-100">
+          <div className="bg-slate-900 rounded-3xl shadow-2xl p-8 max-w-md w-full mx-4 border border-slate-800 animate-glow">
             <div className="text-center mb-6">
-              <div className="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-red-900/30 rounded-full flex items-center justify-center mx-auto mb-4 border border-red-500/30">
                 <span className="text-3xl">🗑️</span>
               </div>
-              <h2 className="text-2xl font-black text-slate-900 mb-2">Supprimer ce neurone ?</h2>
-              <p className="text-slate-500 font-medium">
-                Le neurone <span className="font-bold text-slate-700">&quot;{articleToDelete.title}&quot;</span> sera supprimé définitivement. Cette action est irréversible.
+              <h2 className="text-2xl font-black text-white mb-2">Supprimer ce neurone ?</h2>
+              <p className="text-slate-400 font-medium">
+                Le neurone <span className="font-bold text-cyan-400">&quot;{articleToDelete.title}&quot;</span> sera supprimé définitivement. Cette action est irréversible.
               </p>
             </div>
             <div className="flex gap-3">
               <button
                 onClick={() => setArticleToDelete(null)}
                 disabled={isDeleting}
-                className="flex-1 px-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-2xl transition-all"
+                className="flex-1 px-6 py-3 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold rounded-2xl transition-all"
               >
                 Annuler
               </button>
@@ -188,11 +188,11 @@ const Index = () => {
         <div className="container mx-auto px-4 max-w-6xl">
           {/* Header Section */}
           <div className="text-center py-16 animate-float">
-            <h1 className="text-5xl lg:text-7xl font-black mb-4 bg-clip-text text-transparent bg-gradient-to-r from-teal-600 to-coral-500 drop-shadow-sm">
+            <h1 className="text-6xl lg:text-8xl font-black mb-6 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 drop-shadow-[0_0_30px_rgba(34,211,238,0.3)]">
               🧠 Cerveau en vrac !
             </h1>
-            <p className="text-xl text-slate-700 font-medium">
-              Explorez les connexions de ma pensée créative.
+            <p className="text-xl text-slate-300 font-medium max-w-2xl mx-auto leading-relaxed">
+              Explorez les connexions de ma pensée créative dans cet espace neuronal hautement contrasté.
             </p>
           </div>
 
@@ -236,9 +236,9 @@ const Index = () => {
                 <div
                   key={article.id}
                   onClick={() => handleArticleClick(article.id)}
-                  className={`glass-card group overflow-hidden flex flex-col h-full cursor-pointer relative transition-all duration-300 ${article.file
-                    ? "border-teal-200/60 bg-gradient-to-br from-white/80 to-teal-50/30 shadow-teal-900/5 hover:shadow-teal-900/10"
-                    : "border-white/40"
+                  className={`glass-card group overflow-hidden flex flex-col h-full cursor-pointer relative transition-all duration-500 ${article.file
+                    ? "border-cyan-500/30 bg-gradient-to-br from-slate-900/90 to-cyan-950/20 shadow-cyan-900/10 hover:shadow-cyan-400/20"
+                    : "border-slate-700/50 hover:border-slate-500/50"
                     }`}
                 >
                   {/* Indicateur de média en haut à gauche pour les fichiers */}
@@ -261,11 +261,11 @@ const Index = () => {
 
                   <div className="p-6 flex-grow">
                     <div className="flex justify-between items-start mb-4 pr-10">
-                      <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${article.file ? "bg-teal-200 text-teal-800" : "bg-teal-100 text-teal-700"
+                      <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest ${article.file ? "bg-cyan-500/20 text-cyan-400 border border-cyan-500/30" : "bg-slate-800 text-slate-300 border border-slate-700"
                         }`}>
                         {article.theme || "Général"}
                       </span>
-                      <span className="text-xs text-slate-500 font-medium">
+                      <span className="text-xs text-slate-500 font-bold">
                         {new Date(article.createdAt).toLocaleDateString("fr-FR", {
                           day: "numeric",
                           month: "short",
@@ -273,32 +273,32 @@ const Index = () => {
                       </span>
                     </div>
 
-                    <h3 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-teal-600 transition-colors">
+                    <h3 className="text-2xl font-black text-white mb-3 group-hover:text-cyan-400 transition-colors">
                       {article.title}
                     </h3>
 
-                    <p className="text-slate-600 leading-relaxed line-clamp-3 mb-4 italic">
+                    <p className="text-slate-400 leading-relaxed line-clamp-3 mb-4 font-medium italic">
                       {article.content?.substring(0, 120) ?? "Pas de contenu..."}
                     </p>
                   </div>
 
-                  <div className={`px-6 py-4 border-t border-white/20 flex justify-between items-center ${article.file ? "bg-teal-50/50" : "bg-slate-50/50"
+                  <div className={`px-6 py-4 border-t border-slate-800 flex justify-between items-center ${article.file ? "bg-cyan-950/10" : "bg-slate-950/20"
                     }`}>
                     <div className="flex items-center gap-2">
                       {article.file ? (
-                        <div className="flex items-center gap-1.5 text-teal-600 font-bold text-xs">
+                        <div className="flex items-center gap-1.5 text-cyan-400 font-black text-[10px] uppercase tracking-wider">
                           <span className="text-lg">📎</span>
                           <span>Fichier inclus</span>
                         </div>
                       ) : (
-                        <span className="text-xs font-medium text-slate-400 italic">
+                        <span className="text-[10px] font-black text-slate-600 uppercase tracking-wider italic">
                           Texte uniquement
                         </span>
                       )}
                     </div>
-                    <span className={`font-bold group-hover:translate-x-1 transition-transform ${article.file ? "text-teal-600" : "text-teal-500"
+                    <span className={`font-black text-sm uppercase tracking-wider group-hover:translate-x-1 transition-transform ${article.file ? "text-cyan-400" : "text-blue-400"
                       }`}>
-                      Lire plus →
+                      Explorer →
                     </span>
                   </div>
                 </div>

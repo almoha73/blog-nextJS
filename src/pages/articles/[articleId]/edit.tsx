@@ -136,8 +136,8 @@ const EditArticle = () => {
         <Navbar />
         <main className="flex-grow flex items-center justify-center">
           <div className="text-center">
-            <div className="w-12 h-12 border-4 border-teal-200 border-t-teal-500 rounded-full animate-spin mx-auto mb-4"></div>
-            <p className="text-slate-500 font-bold">Chargement du neurone...</p>
+            <div className="w-16 h-16 border-4 border-slate-800 border-t-cyan-500 rounded-full animate-spin mx-auto mb-6"></div>
+            <p className="text-slate-400 font-black uppercase tracking-widest text-sm">Récupération du neurone...</p>
           </div>
         </main>
         <Footer />
@@ -164,22 +164,22 @@ const EditArticle = () => {
         <div className="container mx-auto max-w-2xl">
           <div className="glass-card p-8 md:p-12">
             <div className="text-center mb-10">
-              <h1 className="text-4xl font-black bg-clip-text text-transparent bg-gradient-to-r from-teal-600 to-coral-500 mb-2">
+              <h1 className="text-5xl font-black bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-purple-500 mb-2">
                 ✎ Modifier le Neurone
               </h1>
-              <p className="text-slate-500 font-medium">Affinez votre pensée.</p>
+              <p className="text-slate-400 font-medium tracking-wide">Affinez votre pensée neuronale.</p>
             </div>
 
             {error && (
-              <div className="mb-8 p-4 bg-red-50 border border-red-100 text-red-600 rounded-2xl text-sm font-bold">
-                ❌ {error}
+              <div className="mb-8 p-4 bg-red-950/20 border border-red-500/30 text-red-500 rounded-2xl text-sm font-black flex items-center gap-2">
+                <span>❌</span> {error}
               </div>
             )}
 
             <form onSubmit={handleUpdate} className="space-y-6">
               {/* Titre */}
               <div>
-                <label className="block text-slate-700 font-bold mb-2 ml-1">Titre</label>
+                <label className="block text-slate-300 font-black uppercase tracking-widest text-xs mb-3 ml-1">Titre</label>
                 <input
                   type="text"
                   value={title}
@@ -191,7 +191,7 @@ const EditArticle = () => {
 
               {/* Thème */}
               <div>
-                <label className="block text-slate-700 font-bold mb-2 ml-1">Thème / Catégorie</label>
+                <label className="block text-slate-300 font-black uppercase tracking-widest text-xs mb-3 ml-1">Thème / Catégorie</label>
                 <input
                   type="text"
                   value={theme}
@@ -203,7 +203,7 @@ const EditArticle = () => {
 
               {/* Contenu */}
               <div>
-                <label className="block text-slate-700 font-bold mb-2 ml-1">Contenu</label>
+                <label className="block text-slate-300 font-black uppercase tracking-widest text-xs mb-3 ml-1">Contenu</label>
                 <textarea
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
@@ -214,11 +214,11 @@ const EditArticle = () => {
 
               {/* Pièce jointe */}
               <div>
-                <label className="block text-slate-700 font-bold mb-2 ml-1">Pièce jointe</label>
+                <label className="block text-slate-300 font-black uppercase tracking-widest text-xs mb-3 ml-1">Pièce jointe</label>
 
                 {/* Affichage de la pièce jointe actuelle */}
                 {currentFileUrl && !removeFile && (
-                  <div className="mb-4 p-4 bg-teal-50 border border-teal-100 rounded-2xl flex items-center justify-between gap-4">
+                  <div className="mb-4 p-4 bg-cyan-950/20 border border-cyan-500/20 rounded-2xl flex items-center justify-between gap-4">
                     <div className="flex items-center gap-3 min-w-0">
                       <span className="text-2xl flex-shrink-0">
                         {currentFileType?.startsWith("image/") ? "🖼️" :
@@ -226,8 +226,8 @@ const EditArticle = () => {
                             currentFileType?.startsWith("video/") ? "🎬" : "📎"}
                       </span>
                       <div className="min-w-0">
-                        <p className="text-sm font-bold text-teal-700">Fichier actuel</p>
-                        <p className="text-xs text-teal-600 truncate">{currentFileType}</p>
+                        <p className="text-[10px] font-black uppercase tracking-wider text-cyan-400">Fichier actuel</p>
+                        <p className="text-xs text-slate-400 truncate">{currentFileType}</p>
                       </div>
                     </div>
                     <div className="flex gap-2 flex-shrink-0">
@@ -235,14 +235,14 @@ const EditArticle = () => {
                         href={currentFileUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-3 py-1.5 text-xs font-bold text-teal-700 bg-white rounded-xl border border-teal-200 hover:bg-teal-50 transition-colors"
+                        className="px-3 py-1.5 text-[10px] font-black uppercase tracking-wider text-cyan-400 bg-slate-900 rounded-xl border border-cyan-500/20 hover:bg-slate-800 transition-colors"
                       >
                         Voir
                       </a>
                       <button
                         type="button"
                         onClick={() => setRemoveFile(true)}
-                        className="px-3 py-1.5 text-xs font-bold text-red-500 bg-white rounded-xl border border-red-200 hover:bg-red-50 transition-colors"
+                        className="px-3 py-1.5 text-[10px] font-black uppercase tracking-wider text-red-400 bg-slate-900 rounded-xl border border-red-500/20 hover:bg-slate-800 transition-colors"
                       >
                         Supprimer
                       </button>
@@ -252,12 +252,12 @@ const EditArticle = () => {
 
                 {/* Message si suppression demandée */}
                 {removeFile && (
-                  <div className="mb-4 p-4 bg-red-50 border border-red-100 rounded-2xl flex items-center justify-between">
-                    <p className="text-sm font-bold text-red-500">🗑️ La pièce jointe sera supprimée à l&apos;enregistrement.</p>
+                  <div className="mb-4 p-4 bg-red-950/20 border border-red-500/20 rounded-2xl flex items-center justify-between">
+                    <p className="text-xs font-black uppercase tracking-wider text-red-400">🗑️ Supprimer à l&apos;enregistrement</p>
                     <button
                       type="button"
                       onClick={() => setRemoveFile(false)}
-                      className="text-xs font-bold text-slate-500 hover:text-slate-700 underline"
+                      className="text-[10px] font-black uppercase tracking-wider text-slate-500 hover:text-slate-300 underline underline-offset-4"
                     >
                       Annuler
                     </button>
@@ -274,11 +274,11 @@ const EditArticle = () => {
                       type="file"
                       accept="image/*, video/*, application/pdf"
                       onChange={(e) => setNewFile(e.target.files ? e.target.files[0] : null)}
-                      className="glass-input w-full file:mr-4 file:py-1 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100 cursor-pointer"
+                      className="glass-input w-full file:mr-4 file:py-1.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-black file:uppercase file:tracking-widest file:bg-cyan-500 file:text-white hover:file:bg-cyan-400 cursor-pointer"
                     />
                     {newFile && (
-                      <p className="text-xs text-teal-600 font-semibold mt-2 ml-1">
-                        ✅ Nouveau fichier sélectionné : {newFile.name}
+                      <p className="text-[10px] font-black uppercase tracking-wider text-cyan-400 mt-3 ml-1 flex items-center gap-2">
+                        <span>✅ Sélectionné :</span> <span className="text-slate-400">{newFile.name}</span>
                       </p>
                     )}
                   </div>
@@ -308,9 +308,9 @@ const EditArticle = () => {
                 <button
                   type="button"
                   onClick={() => router.back()}
-                  className="w-full text-slate-400 font-bold text-sm hover:text-slate-600 transition-colors"
+                  className="w-full mt-2 text-slate-500 font-black uppercase tracking-widest text-xs hover:text-cyan-400 transition-all flex items-center justify-center gap-2 group"
                 >
-                  Annuler et revenir en arrière
+                  <span className="group-hover:-translate-x-1 transition-transform">←</span> Annuler et revenir
                 </button>
               </div>
             </form>

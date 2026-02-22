@@ -95,8 +95,8 @@ const ArticleDetail = () => {
         <Navbar />
         <main className="flex-grow flex items-center justify-center">
           <div className="text-center">
-            <div className="w-12 h-12 border-4 border-teal-200 border-t-teal-500 rounded-full animate-spin mx-auto mb-4"></div>
-            <p className="text-slate-500 font-bold">Récupération des données du neurone...</p>
+            <div className="w-16 h-16 border-4 border-slate-800 border-t-cyan-500 rounded-full animate-spin mx-auto mb-6"></div>
+            <p className="text-slate-400 font-black uppercase tracking-widest text-sm">Synchronisation neuronale...</p>
           </div>
         </main>
         <Footer />
@@ -124,28 +124,28 @@ const ArticleDetail = () => {
       {showConfirmModal && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center"
-          style={{ backgroundColor: "rgba(0,0,0,0.4)", backdropFilter: "blur(4px)" }}
+          style={{ backgroundColor: "rgba(2, 6, 23, 0.8)", backdropFilter: "blur(12px)" }}
         >
-          <div className="bg-white rounded-3xl shadow-2xl p-8 max-w-md w-full mx-4 border border-red-100">
+          <div className="bg-slate-900 rounded-3xl shadow-2xl p-8 max-w-md w-full mx-4 border border-slate-800 animate-glow">
             <div className="text-center mb-6">
-              <div className="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-red-900/30 rounded-full flex items-center justify-center mx-auto mb-4 border border-red-500/30">
                 <span className="text-3xl">🗑️</span>
               </div>
-              <h2 className="text-2xl font-black text-slate-900 mb-2">Supprimer ce neurone ?</h2>
-              <p className="text-slate-500 font-medium">
-                Le neurone <span className="font-bold text-slate-700">&quot;{article.title}&quot;</span> sera supprimé définitivement. Cette action est irréversible.
+              <h2 className="text-2xl font-black text-white mb-2">Supprimer ce neurone ?</h2>
+              <p className="text-slate-400 font-medium">
+                Le neurone <span className="font-bold text-cyan-400">&quot;{article.title}&quot;</span> sera supprimé définitivement. Cette action est irréversible.
               </p>
             </div>
             <div className="flex gap-3">
               <button
                 onClick={() => setShowConfirmModal(false)}
-                className="flex-1 px-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-2xl transition-all"
+                className="flex-1 px-6 py-3 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold rounded-2xl transition-all"
               >
                 Annuler
               </button>
               <button
                 onClick={confirmDelete}
-                className="flex-1 px-6 py-3 bg-red-500 hover:bg-red-600 text-white font-bold rounded-2xl transition-all shadow-sm"
+                className="flex-1 px-6 py-3 bg-red-500 hover:bg-red-600 text-white font-bold rounded-2xl transition-all shadow-sm shadow-red-900/40"
               >
                 Oui, supprimer
               </button>
@@ -161,14 +161,14 @@ const ArticleDetail = () => {
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
               <div className="flex-grow">
                 <div className="flex items-center gap-3 mb-4">
-                  <span className="px-4 py-1 rounded-full text-xs font-black uppercase tracking-widest bg-teal-100 text-teal-700">
+                  <span className="px-4 py-1 rounded-full text-xs font-black uppercase tracking-widest bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
                     {article.theme || "Général"}
                   </span>
-                  <span className="text-slate-400 text-sm font-medium">
-                    Identité neuronale : #{article.id.substring(0, 6)}
+                  <span className="text-slate-500 text-xs font-bold uppercase tracking-wider">
+                    Neurone #{article.id.substring(0, 8).toUpperCase()}
                   </span>
                 </div>
-                <h1 className="text-4xl md:text-5xl font-black text-slate-900 leading-tight">
+                <h1 className="text-4xl md:text-6xl font-black text-white leading-tight drop-shadow-sm">
                   {article.title}
                 </h1>
               </div>
@@ -176,7 +176,7 @@ const ArticleDetail = () => {
               <div className="flex gap-3 w-full md:w-auto">
                 <button
                   onClick={handleEdit}
-                  className="flex-1 md:flex-none px-6 py-3 bg-white/50 hover:bg-white text-slate-600 font-bold rounded-2xl border border-white/60 transition-all flex items-center justify-center gap-2 shadow-sm"
+                  className="flex-1 md:flex-none px-6 py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold rounded-2xl border border-slate-700 transition-all flex items-center justify-center gap-2 shadow-sm"
                 >
                   <span className="text-lg">✎</span> Modifier
                 </button>
@@ -184,8 +184,8 @@ const ArticleDetail = () => {
                   onClick={() => setShowConfirmModal(true)}
                   disabled={isDeleting}
                   className={`flex-1 md:flex-none px-6 py-3 font-bold rounded-2xl border transition-all flex items-center justify-center gap-2 shadow-sm ${isDeleting
-                    ? "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed"
-                    : "bg-red-50 hover:bg-red-100 text-red-500 border-red-100"
+                    ? "bg-slate-900 text-slate-600 border-slate-800 cursor-not-allowed"
+                    : "bg-red-950/20 hover:bg-red-900/40 text-red-500 border-red-500/30"
                     }`}
                 >
                   {isDeleting ? (
@@ -212,15 +212,17 @@ const ArticleDetail = () => {
 
           {/* Pièce jointe */}
           {article.file && article.fileType && (
-            <div className="glass-card p-6 mt-8">
-              <h2 className="text-lg font-bold text-slate-700 mb-4">📎 Pièce jointe</h2>
+            <div className="glass-card p-8 mt-8 border-cyan-500/20 bg-gradient-to-br from-slate-900/90 to-cyan-950/20">
+              <h2 className="text-xl font-black text-white mb-6 flex items-center gap-2">
+                <span className="text-2xl">📎</span> Pièce jointe
+              </h2>
               <FileDisplay file={article.file} fileType={article.fileType} title={article.title} />
             </div>
           )}
 
-          <div className="mt-8 text-center text-slate-400 font-medium">
-            <button onClick={() => router.push("/")} className="hover:text-teal-500 transition-colors">
-              ← Revenir au réseau complet
+          <div className="mt-12 text-center text-slate-500 font-black uppercase tracking-widest text-xs">
+            <button onClick={() => router.push("/")} className="hover:text-cyan-400 transition-all flex items-center gap-2 mx-auto justify-center group">
+              <span className="group-hover:-translate-x-1 transition-transform">←</span> Revenir au réseau complet
             </button>
           </div>
         </div>

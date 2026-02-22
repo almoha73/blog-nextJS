@@ -13,7 +13,7 @@ const Navbar = () => {
       {/* navbar responsive avec tailwind */}
       <div className="sticky top-0 z-50 glass-card !rounded-none !border-x-0 !border-t-0 px-6 py-4 flex justify-between items-center">
         <div className="flex items-center gap-4">
-          <div className="bg-white p-1 rounded-xl shadow-inner">
+          <div className="bg-slate-900 p-1.5 rounded-xl shadow-[inset_0_0_10px_rgba(255,255,255,0.05)] border border-slate-700/50">
             <Image
               src="/logo-brain.png"
               alt="logo"
@@ -22,7 +22,7 @@ const Navbar = () => {
               className="rounded-lg"
             />
           </div>
-          <span className="font-black text-xl tracking-tight text-slate-800">
+          <span className="font-black text-xl tracking-tight text-white">
             BrainBlog
           </span>
         </div>
@@ -30,7 +30,7 @@ const Navbar = () => {
         <nav className="hidden md:flex items-center gap-8">
           <Link
             href="/"
-            className={`text-sm font-bold transition-colors ${router.pathname === "/" ? "text-teal-600" : "text-slate-500 hover:text-teal-500"}`}
+            className={`text-sm font-black uppercase tracking-widest transition-colors ${router.pathname === "/" ? "text-cyan-400" : "text-slate-400 hover:text-cyan-400"}`}
           >
             Accueil
           </Link>
@@ -39,7 +39,7 @@ const Navbar = () => {
         <div className="md:hidden">
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="p-2 text-slate-600 hover:bg-slate-100 rounded-lg transition-colors"
+            className="p-2 text-slate-400 hover:bg-slate-800 rounded-lg transition-colors"
           >
             {isMenuOpen ? (
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -58,7 +58,7 @@ const Navbar = () => {
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 glass-card !rounded-none !border-x-0">
             <Link
-              className={`block px-3 py-2 rounded-md text-base font-medium ${router.pathname === "/" ? "text-teal-600 bg-teal-50" : "text-slate-600 hover:text-teal-500 hover:bg-slate-50"}`}
+              className={`block px-3 py-2 rounded-md text-base font-black uppercase tracking-widest ${router.pathname === "/" ? "text-cyan-400 bg-cyan-500/10" : "text-slate-400 hover:text-cyan-400 hover:bg-slate-800"}`}
               href="/"
             >
               Accueil

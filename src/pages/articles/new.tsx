@@ -62,33 +62,33 @@ const NewArticle = () => {
         <div className="container mx-auto max-w-2xl">
           <div className="glass-card p-8 md:p-12">
             <div className="text-center mb-10">
-              <h1 className="text-4xl font-black bg-clip-text text-transparent bg-gradient-to-r from-teal-600 to-coral-500 mb-2">
+              <h1 className="text-5xl font-black bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-purple-500 mb-2">
                 🧠 Nouveau Neurone
               </h1>
-              <p className="text-slate-500 font-medium">Ajoutez une nouvelle connexion à votre savoir.</p>
+              <p className="text-slate-400 font-medium tracking-wide">Ajoutez une nouvelle connexion à votre univers de savoir.</p>
             </div>
 
             {error && (
-              <div className="mb-8 p-4 bg-red-50 border border-red-100 text-red-600 rounded-2xl text-sm font-bold animate-pulse">
-                ❌ {error}
+              <div className="mb-8 p-4 bg-red-950/20 border border-red-500/30 text-red-500 rounded-2xl text-sm font-black animate-pulse flex items-center gap-2">
+                <span>❌</span> {error}
               </div>
             )}
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label className="block text-slate-700 font-bold mb-2 ml-1">Titre de la pensée</label>
+                <label className="block text-slate-300 font-black uppercase tracking-widest text-xs mb-3 ml-1">Titre de la pensée</label>
                 <input
                   type="text"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   placeholder="Ex: Les secrets de la physique quantique"
-                  className="glass-input w-full font-semibold"
+                  className="glass-input w-full"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-slate-700 font-bold mb-2 ml-1">Thème / Catégorie</label>
+                <label className="block text-slate-300 font-black uppercase tracking-widest text-xs mb-3 ml-1">Thème / Catégorie</label>
                 <input
                   type="text"
                   value={theme}
@@ -100,7 +100,7 @@ const NewArticle = () => {
               </div>
 
               <div>
-                <label className="block text-slate-700 font-bold mb-2 ml-1">Exploration (Contenu)</label>
+                <label className="block text-slate-300 font-black uppercase tracking-widest text-xs mb-3 ml-1">Exploration (Contenu)</label>
                 <textarea
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
@@ -111,13 +111,13 @@ const NewArticle = () => {
               </div>
 
               <div>
-                <label className="block text-slate-700 font-bold mb-2 ml-1">Pièce jointe (Image, PDF...)</label>
+                <label className="block text-slate-300 font-black uppercase tracking-widest text-xs mb-3 ml-1">Pièce jointe (Image, PDF...)</label>
                 <div className="relative">
                   <input
                     type="file"
                     accept="image/*, video/*, application/pdf"
                     onChange={(e) => setFile(e.target.files ? e.target.files[0] : null)}
-                    className="glass-input w-full file:mr-4 file:py-1 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100 cursor-pointer"
+                    className="glass-input w-full file:mr-4 file:py-1.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-black file:uppercase file:tracking-widest file:bg-cyan-500 file:text-white hover:file:bg-cyan-400 cursor-pointer"
                   />
                 </div>
               </div>
@@ -144,9 +144,9 @@ const NewArticle = () => {
                 <button
                   type="button"
                   onClick={() => router.back()}
-                  className="w-full mt-4 text-slate-400 font-bold text-sm hover:text-slate-600 transition-colors"
+                  className="w-full mt-6 text-slate-500 font-black uppercase tracking-widest text-xs hover:text-cyan-400 transition-all flex items-center justify-center gap-2 group"
                 >
-                  Annuler et revenir en arrière
+                  <span className="group-hover:-translate-x-1 transition-transform">←</span> Annuler et revenir
                 </button>
               </div>
             </form>

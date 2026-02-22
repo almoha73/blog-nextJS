@@ -4,37 +4,71 @@
 
 @layer base {
   body {
-    @apply min-h-screen text-slate-900 antialiased selection:bg-teal-100 selection:text-teal-900;
-    background: fixed linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('/images/brain_bg.png') no-repeat center center;
+    /* Deep dark background with a subtle gradient */
+    @apply min-h-screen text-slate-100 antialiased selection:bg-cyan-500 selection:text-white;
+    background: fixed linear-gradient(135deg, #020617 0%, #0f172a 50%, #1e1b4b 100%);
     background-size: cover;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-white font-bold;
   }
 }
 
 @layer components {
   .glass-card {
-    @apply bg-white/70 backdrop-blur-md border border-white/40 shadow-xl rounded-2xl transition-all duration-300;
+    /* Darker glass effect for higher contrast */
+    @apply bg-slate-900/80 backdrop-blur-xl border border-slate-700/50 shadow-2xl rounded-2xl transition-all duration-500;
   }
   
   .glass-card:hover {
-    @apply bg-white/80 shadow-2xl scale-[1.02];
+    @apply bg-slate-800/90 border-slate-500/50 shadow-cyan-900/20 scale-[1.01];
   }
 
   .glass-input {
-    @apply bg-white/50 backdrop-blur-sm border border-white/60 focus:bg-white/90 focus:ring-2 focus:ring-teal-400 outline-none transition-all duration-200 rounded-xl px-4 py-2;
+    /* Dark input for dark theme */
+    @apply bg-slate-950/50 backdrop-blur-md border border-slate-700 focus:border-cyan-400 focus:bg-slate-900/80 focus:ring-2 focus:ring-cyan-400/20 outline-none transition-all duration-300 rounded-xl px-4 py-2 text-white placeholder:text-slate-500;
   }
 
   .neuron-btn {
-    @apply bg-gradient-to-r from-teal-400 to-emerald-400 text-white font-bold py-3 px-6 rounded-2xl shadow-lg shadow-teal-200/50 hover:shadow-xl hover:shadow-teal-300/60 hover:-translate-y-1 active:scale-95 transition-all duration-200;
+    /* High contrast vibrant gradient */
+    @apply bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 text-white font-black py-3 px-6 rounded-2xl shadow-lg shadow-cyan-900/40 hover:shadow-cyan-400/20 hover:brightness-110 hover:-translate-y-1 active:scale-95 transition-all duration-300;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500;
   }
 }
 
-/* Custom animations */
+/* Enhanced animations */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 15px rgba(34, 211, 238, 0.2); }
+  50% { box-shadow: 0 0 30px rgba(34, 211, 238, 0.4); }
+}
+
+.animate-glow {
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+
 @keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0px); }
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(1deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
 }
 
 .animate-float {
-  animation: float 6s ease-in-out infinite;
+  animation: float 8s ease-in-out infinite;
+}
+
+/* Custom scrollbar for dark theme */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-slate-950;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-800 rounded-full border-2 border-slate-950 hover:bg-slate-700;
 }

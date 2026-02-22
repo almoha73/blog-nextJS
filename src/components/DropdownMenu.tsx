@@ -39,7 +39,7 @@ const DropdownMenu = ({ options, onSelect }: DropdownMenuProps) => {
       <div>
         <button
           type="button"
-          className="glass-input inline-flex justify-center items-center w-full !px-5 !py-2.5 text-sm font-bold text-slate-700 hover:bg-white/80"
+          className="glass-input inline-flex justify-center items-center w-full !px-5 !py-2.5 text-sm font-black uppercase tracking-widest text-white hover:border-cyan-400"
           id="options-menu"
           aria-haspopup="true"
           aria-expanded="true"
@@ -50,7 +50,7 @@ const DropdownMenu = ({ options, onSelect }: DropdownMenuProps) => {
         </button>
       </div>
       {isOpen && (
-        <div className="glass-card absolute right-0 mt-3 w-56 !rounded-xl !bg-white overflow-hidden z-[100] shadow-2xl border border-slate-200">
+        <div className="glass-card absolute right-0 mt-3 w-56 !rounded-2xl !bg-slate-900/95 overflow-hidden z-[100] shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-slate-700/50">
           <div
             className="py-1"
             role="menu"
@@ -61,7 +61,7 @@ const DropdownMenu = ({ options, onSelect }: DropdownMenuProps) => {
               <button
                 key={option.label}
                 onClick={() => handleOptionClick(option)}
-                className="block w-full px-4 py-3 text-sm font-semibold text-slate-600 hover:bg-teal-50 hover:text-teal-600 text-left transition-colors"
+                className="block w-full px-4 py-3 text-xs font-black uppercase tracking-widest text-slate-400 hover:bg-cyan-500/10 hover:text-cyan-400 text-left transition-all"
                 role="menuitem"
               >
                 {option.label}
