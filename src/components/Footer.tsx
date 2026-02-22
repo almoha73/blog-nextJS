@@ -8,7 +8,7 @@ const Footer = () => {
           © {new Date().getFullYear()} BrainBlog
         </p>
         <p className="text-slate-600 font-bold text-xs">
-          Propulsé par l'imagination et les connexions neuronales.
+          Propulsé par l&apos;imagination et les connexions neuronales.
         </p>
       </div>
     </footer>
